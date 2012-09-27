@@ -1,4 +1,4 @@
-# SequelSecurePassword
+# Sequel secure_password
 
 Plugin adds BCrypt authentication and password hashing to Sequel models.
 Model using this plugin should have `password_digest` field.
@@ -22,10 +22,12 @@ Or install it yourself as:
 ## Usage
 
 Plugin should be used in subclasses of `Sequel::Model`. The model should have
-`password_digest` attribute in database. __Always__ call super in `validate`
-method of your model, otherwise password validations won't be executed.
+`password_digest` attribute in database.  
+__Always__ call super in `validate` method of your model, otherwise password
+validations won't be executed.  
 It __does not__ `set_allowed_columns` and mass assignment policy must be managed
 separately.
+
 Example model:
 
     class User < Sequel::Model
