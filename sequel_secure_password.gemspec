@@ -26,7 +26,7 @@ EOF
 
   gem.add_development_dependency 'rspec', '~> 2.11.0'
   gem.add_development_dependency 'rake',  '~> 0.9.0'
-  if RUBY_PLATFORM == "jruby"
+  if RUBY_PLATFORM == "java"
     gem.add_development_dependency 'jdbc-sqlite3', '~> 3.7.2'
   else
     gem.add_development_dependency 'sqlite3', '~> 1.3.0'
