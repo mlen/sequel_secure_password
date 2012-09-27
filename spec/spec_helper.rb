@@ -4,10 +4,12 @@ Bundler.setup
 require 'sequel'
 require 'sequel_secure_password'
 
+adapter = RUBY_PLATFORM == "java" ? 'jdbc:sqlite::memory:' : 'sqlite:/'
+
 RSpec.configure do |c|
   c.before :suite do
     Sequel::Model.plugin(:schema)
-    Sequel.connect 'sqlite:/'
+    Sequel.connect adapter
 
     class User < Sequel::Model
       set_schema do
