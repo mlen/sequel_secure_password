@@ -1,4 +1,4 @@
-# Sequel secure_password
+# Sequel secure_password [![Build Status](https://secure.travis-ci.org/mlen/sequel_secure_password.png)](http://travis-ci.org/mlen/sequel_secure_password)
 
 Plugin adds BCrypt authentication and password hashing to Sequel models.
 Model using this plugin should have `password_digest` field.
