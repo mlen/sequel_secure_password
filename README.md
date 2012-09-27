@@ -24,6 +24,8 @@ Or install it yourself as:
 Plugin should be used in subclasses of `Sequel::Model`. The model should have
 `password_digest` attribute in database. __Always__ call super in `validate`
 method of your model, otherwise password validations won't be executed.
+It __does not__ `set_allowed_columns` and mass assignment policy must be managed
+separately.
 Example model:
 
     class User < Sequel::Model

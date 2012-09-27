@@ -10,7 +10,7 @@ module Sequel
 
         def password=(unencrypted)
           @password = unencrypted
-          unless unencrypted =~ /\A\s*\z/
+          unless blank? unencrypted
             self.password_digest = BCrypt::Password.create(unencrypted)
           end
         end
@@ -24,8 +24,13 @@ module Sequel
         def validate
           super
 
-          errors.add :password_digest, 'is not present' if password_digest == ""
+          errors.add :password_digest, 'is not present' if blank? password_digest
           errors.add :password, 'has no confirmation'   if password != password_confirmation
+        end
+
+        private
+        def blank?(string)
+          string.nil? or string == /\A\s*\z/
         end
 
       end
