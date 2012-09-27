@@ -25,6 +25,7 @@ EOF
   gem.add_dependency 'sequel',      '~> 3.40.0'
 
   gem.add_development_dependency 'rspec', '~> 2.11.0'
+  gem.add_development_dependency 'rake',  '~> 0.9.0'
   if RUBY_PLATFORM == "jruby"
     gem.add_development_dependency 'jdbc-sqlite3', '~> 3.7.2'
   else
