@@ -1,4 +1,5 @@
 require "sequel_secure_password/version"
+require "bcrypt"
 
 module Sequel
   module Plugins

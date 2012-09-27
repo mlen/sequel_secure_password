@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler'
 Bundler.setup
 require 'sequel'
+require 'sequel_secure_password'
 
 RSpec.configure do |c|
   c.before :suite do
@@ -13,6 +14,8 @@ RSpec.configure do |c|
         primary_key :id
         varchar     :password_digest
       end
+
+      plugin :secure_password
     end
 
     User.create_table!
