@@ -1,44 +1,49 @@
 require 'spec_helper'
 
-describe "model with Sequel::Plugins::SecurePassword" do
-  subject { User.new }
+describe "model using Sequel::Plugins::SecurePassword" do
+  subject(:user) { User.new }
 
-  it "is invalid with blank password" do
-    subject.password = ""
-    subject.should_not be_valid
+  context "with blank password" do
+    before { user.password = "" }
+
+    it { should_not be_valid }
   end
 
-  it "is invalid with nil password" do
-    subject.password = nil
-    subject.should_not be_valid
+  context "with nil password" do
+    before { user.password = nil }
+
+    it { should_not be_valid }
   end
 
-  it "is invalid without a password" do
-    subject.should_not be_valid
+  context "without setting a password" do
+    it { should_not be_valid }
   end
 
-  it "is valid with password matching confirmation" do
-    subject.password = "foo"
-    subject.password_confirmation = "foo"
+  context "without confirmation" do
+    before { user.password = "foo" }
 
-    subject.should be_valid
+    it { should_not be_valid }
   end
 
-  it "is invalid without password matching confirmation" do
-    subject.password = "foo"
-    subject.password_confirmation = "bar"
+  context "when password matches confirmation" do
+    before { user.password = user.password_confirmation = "foo" }
 
-    subject.should_not be_valid
+    it { should be_valid }
   end
 
-  it "returns user when authentication is successful" do
-    subject.password = "foo"
-    subject.authenticate("foo").should be subject
-  end
+  describe "#authenticate" do
+    let(:secret) { "foo" }
+    before { user.password = secret }
 
-  it "returns nil when authentication fails" do
-    subject.password = "foo"
-    subject.authenticate("bar").should be nil
+    context "when authentication is successful" do
+      it "returns the user" do
+        user.authenticate(secret).should be user
+      end
+    end
+
+    context "when authentication fails" do
+      it { user.authenticate("").should be nil }
+    end
   end
 
 end
