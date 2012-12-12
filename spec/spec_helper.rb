@@ -1,6 +1,11 @@
 require 'rubygems'
 require 'bundler'
 Bundler.setup
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/vendor/bundler/'
+end
+
 require 'sequel'
 require 'sequel_secure_password'
 
