@@ -1,9 +1,12 @@
 require 'rubygems'
 require 'bundler'
 Bundler.setup
-require 'simplecov'
-SimpleCov.start do
-  add_filter '/vendor/bundler/'
+
+unless ENV['CI']
+  require 'simplecov'
+  SimpleCov.start do
+    add_filter '/vendor/bundler/'
+  end
 end
 
 require 'sequel'
