@@ -22,11 +22,10 @@ EOF
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'bcrypt-ruby', '~> 3.0.0'
-  gem.add_dependency 'sequel',      '~> 3.40.0'
+  gem.add_dependency 'sequel',      '~> 3.48.0'
 
-  gem.add_development_dependency 'rspec',     '~> 2.11.0'
-  gem.add_development_dependency 'rake',      '~> 0.9.0'
-  gem.add_development_dependency 'simplecov', '~> 0.7.1'
+  gem.add_development_dependency 'rspec',     '~> 2.13.0'
+  gem.add_development_dependency 'rake',      '~> 10.0.0'
   if RUBY_PLATFORM == "java"
     gem.add_development_dependency 'jdbc-sqlite3', '~> 3.7.2'
   else
