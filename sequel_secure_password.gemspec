@@ -21,10 +21,10 @@ EOF
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'bcrypt-ruby', '~> 3.0.0'
-  gem.add_dependency 'sequel',      '~> 3.48.0'
+  gem.add_dependency 'bcrypt-ruby', '~> 3.1.0'
+  gem.add_dependency 'sequel',      '~> 4.0.0'
 
-  gem.add_development_dependency 'rspec',     '~> 2.13.0'
+  gem.add_development_dependency 'rspec',     '~> 2.14.0'
   gem.add_development_dependency 'rake',      '~> 10.0.0'
   if RUBY_PLATFORM == "java"
     gem.add_development_dependency 'jdbc-sqlite3', '~> 3.7.2'
