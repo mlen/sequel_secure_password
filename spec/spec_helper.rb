@@ -22,6 +22,17 @@ RSpec.configure do |c|
     end
 
     User.create_table!
+
+    class HighCostUser < Sequel::Model
+      set_schema do
+        primary_key :id
+        varchar     :password_digest
+      end
+
+      plugin :secure_password, :cost => 12
+    end
+
+    HighCostUser.create_table!
   end
 
   c.around :each do |example|

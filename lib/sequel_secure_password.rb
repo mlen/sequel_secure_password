@@ -4,6 +4,21 @@ require "bcrypt"
 module Sequel
   module Plugins
     module SecurePassword
+
+      # Configure the plugin by setting the available options. Options:
+      # * :cost - the cost factor when creating password hash. Default:
+      # BCrypt::Engine::DEFAULT_COST(10)
+      def self.configure(model, opts=OPTS)
+        model.instance_eval do
+          @cost = opts[:cost] || BCrypt::Engine::DEFAULT_COST
+        end
+      end
+
+      module ClassMethods
+        attr_reader :cost
+        Plugins.inherited_instance_variables(self, @cost => nil)
+      end
+
       module InstanceMethods
         attr_accessor :password_confirmation
         attr_reader   :password
@@ -11,7 +26,7 @@ module Sequel
         def password=(unencrypted)
           @password = unencrypted
           unless blank? unencrypted
-            self.password_digest = BCrypt::Password.create(unencrypted)
+            self.password_digest = BCrypt::Password.create(unencrypted, :cost => model.cost)
           end
         end
 

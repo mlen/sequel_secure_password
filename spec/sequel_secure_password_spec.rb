@@ -25,6 +25,13 @@ describe "model using Sequel::Plugins::SecurePassword" do
     it { should_not be_valid }
   end
 
+  context "having cost within password_digest" do
+    before { user.password = "foo" }
+    it {
+      BCrypt::Password.new(user.password_digest).cost.should be BCrypt::Engine::DEFAULT_COST
+    }
+  end
+
   context "when password matches confirmation" do
     before { user.password = user.password_confirmation = "foo" }
 
@@ -46,4 +53,14 @@ describe "model using Sequel::Plugins::SecurePassword" do
     end
   end
 
+  describe "with cost option" do
+    subject(:highcost_user) { HighCostUser.new }
+    context "having cost within password_digest" do
+      before { highcost_user.password = "foo" }
+      it {
+        BCrypt::Password.new(highcost_user.password_digest).cost.should be 12
+      }
+    end
+
+  end
 end
