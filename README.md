@@ -22,9 +22,9 @@ Or install it yourself as:
 ## Usage
 
 Plugin should be used in subclasses of `Sequel::Model`. The model should have
-`password_digest` attribute in database.  
+`password_digest` attribute in database.
 __Always__ call super in `validate` method of your model, otherwise password
-validations won't be executed.  
+validations won't be executed.
 It __does not__ `set_allowed_columns` and mass assignment policy must be managed
 separately.
 
@@ -32,6 +32,11 @@ Example model:
 
     class User < Sequel::Model
       plugin :secure_password
+    end
+
+    # cost option can be used to change computational complexity of BCrypt
+    class HighCostUser < Sequel::Model
+      plugin :secure_password, cost: 12
     end
 
     user = User.new
@@ -52,3 +57,7 @@ Example model:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Thanks
+
+Thanks to [@send](https//:github.com/send) for implementing the `:cost` option.
