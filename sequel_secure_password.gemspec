@@ -16,16 +16,17 @@ Model using this plugin should have 'password_digest' field.
 This plugin was created by extracting has_secure_password strategy from rails.
 EOF
   gem.homepage      = "http://github.com/mlen/sequel_secure_password"
+  gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'bcrypt-ruby', '~> 3.1.0'
-  gem.add_dependency 'sequel',      '~> 4.1.0'
+  gem.add_dependency 'bcrypt-ruby', ['>= 3.1', '< 4.0']
+  gem.add_dependency 'sequel',      ['>= 4.1.0', '< 5.0']
 
-  gem.add_development_dependency 'rspec',     '~> 2.14.0'
-  gem.add_development_dependency 'rake',      '~> 10.0.0'
+  gem.add_development_dependency 'rspec',     '~> 2.14'
+  gem.add_development_dependency 'rake',      '~> 10'
   if RUBY_PLATFORM == "java"
     gem.add_development_dependency 'jdbc-sqlite3', '~> 3.7.2'
   else
