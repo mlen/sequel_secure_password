@@ -8,9 +8,9 @@ module Sequel
       # Configure the plugin by setting the available options. Options:
       # * :cost - the cost factor when creating password hash. Default:
       # BCrypt::Engine::DEFAULT_COST(10)
-      def self.configure(model, opts=OPTS)
+      def self.configure(model, options = {})
         model.instance_eval do
-          @cost = opts[:cost] || BCrypt::Engine::DEFAULT_COST
+          @cost = options.fetch(:cost, BCrypt::Engine::DEFAULT_COST)
         end
       end
 
