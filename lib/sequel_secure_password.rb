@@ -45,7 +45,7 @@ module Sequel
 
         private
         def blank?(string)
-          string.nil? or string == /\A\s*\z/
+          string.nil? or string =~ /\A\s*\z/
         end
 
       end

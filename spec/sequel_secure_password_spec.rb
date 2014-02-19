@@ -3,14 +3,20 @@ require 'spec_helper'
 describe "model using Sequel::Plugins::SecurePassword" do
   subject(:user) { User.new }
 
-  context "with blank password" do
-    before { user.password = "" }
+  context "with empty password" do
+    before { user.password = user.password_confirmation = "" }
+
+    it { should_not be_valid }
+  end
+
+  context "with whitespace password" do
+    before { user.password = user.password_confirmation = "    "; }
 
     it { should_not be_valid }
   end
 
   context "with nil password" do
-    before { user.password = nil }
+    before { user.password = user.password_confirmation = nil }
 
     it { should_not be_valid }
   end
