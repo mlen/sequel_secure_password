@@ -39,8 +39,8 @@ module Sequel
         def validate
           super
 
-          errors.add :password_digest, 'is not present' if blank? password_digest
-          errors.add :password, 'has no confirmation'   if password != password_confirmation
+          errors.add :password, 'is not present'      if blank? password_digest
+          errors.add :password, 'has no confirmation' if password != password_confirmation
         end
 
         private
