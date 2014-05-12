@@ -44,6 +44,10 @@ describe "model using Sequel::Plugins::SecurePassword" do
     it { should be_valid }
   end
 
+  it "has an inherited instance variable :@cost" do
+    expect( User.inherited_instance_variables ).to include(:@cost)
+  end
+
   describe "#authenticate" do
     let(:secret) { "foo" }
     before { user.password = secret }

@@ -16,7 +16,7 @@ module Sequel
 
       module ClassMethods
         attr_reader :cost
-        Plugins.inherited_instance_variables(self, @cost => nil)
+        Plugins.inherited_instance_variables(self, :@cost => nil)
       end
 
       module InstanceMethods
