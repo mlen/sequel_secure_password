@@ -22,7 +22,7 @@ EOF
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'bcrypt-ruby', ['>= 3.1', '< 4.0']
+  gem.add_dependency 'bcrypt',      ['>= 3.1', '< 4.0']
   gem.add_dependency 'sequel',      ['>= 4.1.0', '< 5.0']
 
   gem.add_development_dependency 'rspec',     '~> 2.14'
