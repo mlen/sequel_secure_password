@@ -4,6 +4,9 @@ require "bcrypt"
 module Sequel
   module Plugins
     module SecurePassword
+      def self.blank_string?(string)
+        string.nil? or string =~ /\A\s*\z/
+      end
 
       # Configure the plugin by setting the available options. Options:
       # * :cost - the cost factor when creating password hash. Default:
@@ -25,7 +28,7 @@ module Sequel
 
         def password=(unencrypted)
           @password = unencrypted
-          unless blank? unencrypted
+          unless SecurePassword.blank_string? unencrypted
             self.password_digest = BCrypt::Password.create(unencrypted, :cost => model.cost)
           end
         end
@@ -39,14 +42,11 @@ module Sequel
         def validate
           super
 
-          errors.add :password, 'is not present'      if blank? password_digest
+          errors.add :password, 'is not present'      if SecurePassword.blank_string? password_digest
           errors.add :password, 'has no confirmation' if password != password_confirmation
         end
 
         private
-        def blank?(string)
-          string.nil? or string =~ /\A\s*\z/
-        end
 
       end
     end
