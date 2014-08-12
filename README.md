@@ -39,6 +39,12 @@ Example model:
       plugin :secure_password, cost: 12
     end
 
+    # include_validations option can be used to disable default password
+    # presence and confirmation
+    class UserWithoutValidations < Sequel::Model
+      plugin :secure_password, include_validations: false
+    end
+
     user = User.new
     user.password = "foo"
     user.password_confirmation = "bar"
@@ -52,12 +58,13 @@ Example model:
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+1. Open an issue
+2. Discuss proposed change
+3. Once we both agree on the change I'll implement it or if you want it really
+   badly, fork the project and create a pull request.
 
 ## Thanks
 
-Thanks to [@send](https//:github.com/send) for implementing the `:cost` option.
+Thanks to [@send](https://github.com/send) for implementing the `:cost` option
+and to [@badosu](https://github.com/badosu) for motivating me to add
+`:include_validations` option.
