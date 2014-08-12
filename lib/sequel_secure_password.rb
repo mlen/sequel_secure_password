@@ -11,15 +11,19 @@ module Sequel
       # Configure the plugin by setting the available options. Options:
       # * :cost - the cost factor when creating password hash. Default:
       # BCrypt::Engine::DEFAULT_COST(10)
+      # * :include_validations - when set to false, password present and
+      # confirmation validations won't be included. Default: true
       def self.configure(model, options = {})
         model.instance_eval do
-          @cost = options.fetch(:cost, BCrypt::Engine::DEFAULT_COST)
+          @cost                = options.fetch(:cost, BCrypt::Engine::DEFAULT_COST)
+          @include_validations = options.fetch(:include_validations, true)
         end
       end
 
       module ClassMethods
-        attr_reader :cost
-        Plugins.inherited_instance_variables(self, :@cost => nil)
+        attr_reader :cost, :include_validations
+        Plugins.inherited_instance_variables(self, :@cost                => nil,
+                                                   :@include_validations => true)
       end
 
       module InstanceMethods
@@ -42,12 +46,12 @@ module Sequel
         def validate
           super
 
-          errors.add :password, 'is not present'      if SecurePassword.blank_string? password_digest
-          errors.add :password, 'has no confirmation' if password != password_confirmation
+          if model.include_validations
+            errors.add :password, 'is not present'      if SecurePassword.blank_string? password_digest
+            errors.add :password, 'has no confirmation' if SecurePassword.blank_string? password_confirmation
+            errors.add :password, 'doesn\'t match confirmation' if password != password_confirmation
+          end
         end
-
-        private
-
       end
     end
   end

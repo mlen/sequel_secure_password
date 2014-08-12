@@ -48,6 +48,20 @@ describe "model using Sequel::Plugins::SecurePassword" do
     expect( User.inherited_instance_variables ).to include(:@cost)
   end
 
+  it "has an inherited instance variable :@include_validations" do
+    expect( User.inherited_instance_variables ).to include(:@include_validations)
+  end
+
+  context "when validations are disabled" do
+    subject(:user_without_validations) { UserWithoutValidations.new }
+    before do
+      user_without_validations.password = "foo"
+      user_without_validations.password_confirmation = "bar"
+    end
+
+    it { should be_valid }
+  end
+
   describe "#authenticate" do
     let(:secret) { "foo" }
     before { user.password = secret }
@@ -71,6 +85,5 @@ describe "model using Sequel::Plugins::SecurePassword" do
         BCrypt::Password.new(highcost_user.password_digest).cost.should be 12
       }
     end
-
   end
 end
