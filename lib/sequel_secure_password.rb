@@ -47,8 +47,7 @@ module Sequel
           super
 
           if model.include_validations
-            errors.add :password, 'is not present'      if SecurePassword.blank_string? password_digest
-            errors.add :password, 'has no confirmation' if SecurePassword.blank_string? password_confirmation
+            errors.add :password, 'is not present'              if SecurePassword.blank_string?(password_digest)
             errors.add :password, 'doesn\'t match confirmation' if password != password_confirmation
           end
         end
