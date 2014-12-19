@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.name          = "sequel_secure_password"
   gem.version       = SequelSecurePassword::VERSION
   gem.authors       = ["Mateusz Lenik"]
-  gem.email         = ["mt.lenik@gmail.com"]
+  gem.email         = ["gems@mlen.pl"]
   gem.description   = %q{Plugin adds authentication methods to Sequel models using BCrypt library.}
   gem.summary       = <<EOF
 Plugin adds BCrypt authentication and password hashing to Sequel models.
