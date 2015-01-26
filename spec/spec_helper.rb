@@ -39,9 +39,19 @@ RSpec.configure do |c|
       plugin :secure_password, include_validations: false
     end
 
+    class UserWithAlternateDigestColumn < Sequel::Model
+      set_schema do
+        primary_key :id
+        varchar     :password_hash
+      end
+
+      plugin :secure_password, digest_column: :password_hash
+    end
+
     User.create_table!
     HighCostUser.create_table!
     UserWithoutValidations.create_table!
+    UserWithAlternateDigestColumn.create_table!
   end
 
   c.around :each do |example|

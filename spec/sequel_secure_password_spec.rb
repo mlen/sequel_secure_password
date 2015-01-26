@@ -52,6 +52,10 @@ describe "model using Sequel::Plugins::SecurePassword" do
     expect( User.inherited_instance_variables ).to include(:@include_validations)
   end
 
+  it "has an inherited instance variable :@digest_column" do
+    expect( User.inherited_instance_variables ).to include(:@digest_column)
+  end
+
   context "when validations are disabled" do
     subject(:user_without_validations) { UserWithoutValidations.new }
     before do
@@ -83,6 +87,16 @@ describe "model using Sequel::Plugins::SecurePassword" do
       before { highcost_user.password = "foo" }
       it {
         BCrypt::Password.new(highcost_user.password_digest).cost.should be 12
+      }
+    end
+  end
+
+  describe "with digest column option" do
+    subject(:digestcolumn_user) { UserWithAlternateDigestColumn.new }
+    context "having an alternate digest column" do
+      before { digestcolumn_user.password = "foo" }
+      it {
+        BCrypt::Password.new(digestcolumn_user.password_hash).should eq "foo"
       }
     end
   end
