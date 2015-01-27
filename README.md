@@ -21,8 +21,7 @@ Or install it yourself as:
 
 ## Usage
 
-Plugin should be used in subclasses of `Sequel::Model`. The model should have
-`password_digest` attribute in database.
+Plugin should be used in subclasses of `Sequel::Model`.
 __Always__ call super in `validate` method of your model, otherwise password
 validations won't be executed.
 It __does not__ `set_allowed_columns` and mass assignment policy must be managed
@@ -43,6 +42,12 @@ Example model:
     # presence and confirmation
     class UserWithoutValidations < Sequel::Model
       plugin :secure_password, include_validations: false
+    end
+
+    # digest_column option can be used to use an alternate database column.
+    # the default column is "password_digest"
+    class UserWithAlternateDigestColumn < Sequel::Model
+      plugin :secure_password, digest_column: :password_hash
     end
 
     user = User.new
