@@ -15,7 +15,7 @@ module Sequel
       # confirmation validations won't be included. Default: true
       def self.configure(model, options = {})
         model.instance_eval do
-          @cost                = options.fetch(:cost, BCrypt::Engine::DEFAULT_COST)
+          @cost                = options.fetch(:cost, BCrypt::Engine.cost)
           @include_validations = options.fetch(:include_validations, true)
           @digest_column       = options.fetch(:digest_column, :password_digest)
         end
