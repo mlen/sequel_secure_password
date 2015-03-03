@@ -6,7 +6,7 @@ Gem::Tasks::Build::Gem.new
 
 # git-related tasks
 Gem::Tasks::SCM::Status.new
-# Gem::Tasks::SCM::Tag.new(format: '%s', sign: true)
+Gem::Tasks::SCM::Tag.new(format: '%s', sign: true)
 Gem::Tasks::SCM::Push.new
 
 # pushing to gemcutter
