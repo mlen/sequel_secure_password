@@ -25,8 +25,10 @@ EOF
   gem.add_dependency 'bcrypt',      ['>= 3.1', '< 4.0']
   gem.add_dependency 'sequel',      ['>= 4.1.0', '< 5.0']
 
-  gem.add_development_dependency 'rspec',     '~> 2.14'
-  gem.add_development_dependency 'rake',      '~> 10'
+  gem.add_development_dependency 'rspec',          '~> 2.14'
+  gem.add_development_dependency 'rake',           '~> 10'
+  gem.add_development_dependency 'rubygems-tasks', '~> 0.2'
+  gem.add_development_dependency 'pry'
   if RUBY_PLATFORM == "java"
     gem.add_development_dependency 'jdbc-sqlite3', '~> 3.7.2'
   else
