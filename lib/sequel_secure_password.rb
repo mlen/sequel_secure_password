@@ -24,9 +24,12 @@ module Sequel
 
       module ClassMethods
         attr_reader :cost, :include_validations, :digest_column
-        Plugins.inherited_instance_variables(self, :@cost                => nil,
-                                                   :@include_validations => true,
-                                                   :@digest_column       => :password_digest)
+
+        # NOTE: nil as a value means that the value of the instance variable
+        # will be assigned as is in the subclass.
+        Plugins.inherited_instance_variables(self, '@cost':                nil,
+                                                   '@include_validations': nil,
+                                                   '@digest_column':       nil)
       end
 
       module InstanceMethods
@@ -35,7 +38,8 @@ module Sequel
 
         def password=(unencrypted)
           @password = unencrypted
-          unless SecurePassword.blank_string? unencrypted
+
+          unless SecurePassword.blank_string?(unencrypted)
             self.send "#{model.digest_column}=", BCrypt::Password.create(unencrypted, :cost => model.cost)
           end
         end
