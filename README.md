@@ -68,8 +68,11 @@ Example model:
 3. Once we both agree on the change I'll implement it or if you want it really
    badly, fork the project and create a pull request.
 
-## Thanks
+## Acknowledgements
 
-Thanks to [@send](https://github.com/send) for implementing the `:cost` option
-and to [@badosu](https://github.com/badosu) for motivating me to add
-`:include_validations` option.
+- Thanks to [@send](https://github.com/send) for implementing the `:cost` 
+  option;
+- Thanks to [@badosu](https://github.com/badosu) for motivating me to add 
+  `:include_validations` option.
+- Thanks to [@AlexWayfer](https://github.com/AlexWayfer) for fixing a bug that 
+  prevented inheriting from classes using the plugin.
