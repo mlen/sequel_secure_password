@@ -27,9 +27,9 @@ module Sequel
 
         # NOTE: nil as a value means that the value of the instance variable
         # will be assigned as is in the subclass.
-        Plugins.inherited_instance_variables(self, '@cost':                nil,
-                                                   '@include_validations': nil,
-                                                   '@digest_column':       nil)
+        Plugins.inherited_instance_variables(self, :@cost                => nil,
+                                                   :@include_validations => nil,
+                                                   :@digest_column       => nil)
       end
 
       module InstanceMethods
