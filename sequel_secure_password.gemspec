@@ -23,7 +23,7 @@ EOF
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'bcrypt',      ['>= 3.1', '< 4.0']
-  gem.add_dependency 'sequel',      ['>= 4.1.0', '< 5.0']
+  gem.add_dependency 'sequel',      ['>= 4.1.0', '< 6.0']
 
   gem.add_development_dependency 'rspec',          '~> 3.0'
   gem.add_development_dependency 'rake',           '~> 12'
